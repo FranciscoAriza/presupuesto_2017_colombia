@@ -1,18 +1,202 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
-<head>
-<meta charset="utf-8">
-<title>Presupuesto General de la Nación - Colombia 2017</title>
+	<head>
+		<title>Presupuesto General de la Nación - Colombia 2017</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 
-<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
-  <link href="static/css/style.css" rel="stylesheet">
-  <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
-</head>
-<body>
-<div id="chart"></div>
-<div class="col-md-23 legend" style="margin-top:-10px;margin-bottom:0px;">
-	<strong>Variación Presupuesto Inicial vs Vigente</strong>
-	<div id="legend"></div>
-</div>
-<script src="static/js/script.js"></script>
-</body>
+    <script type="text/javascript" src="assets/js/d3.min.js"></script>
+    <script type="text/javascript" src="assets/js/viz.js"></script>
+	</head>
+	<body onload="main()">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<span class="logo"><img src="images/logo.svg" alt="" /></span>
+						<h1>Presupuesto General de la Nación (PGN) - 2017</h1>
+						<p>COLOMBIA<br />
+						<!-- built by <a href="https://twitter.com/ajlkn">@ajlkn</a> for <a href="https://html5up.net">HTML5 UP</a>.</p> -->
+					</p>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li><a href="#intro" class="active">Introducción</a></li>
+							<li><a href="#first">Dataset</a></li>
+							<li><a href="#second">Visualización</a></li>
+							<li><a href="#cta">Próximos pasos</a></li>
+						</ul>
+					</nav>
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Introduction -->
+							<section id="intro" class="main">
+								<div class="spotlight">
+									<div class="content">
+										<header class="major">
+											<h2>¿Qué es el PGN?</h2>
+										</header>
+										<p style="font-style: italic;">"El Ministerio de Hacienda y Crédito Público lidera, diseña y ejecuta las finanzas públicas y establece la política fiscal del país. En virtud de ello, la Dirección General de Presupuesto Público Nacional, como autoridad presupuestal central nacional, administra este instrumento de manejo financiero a través del Presupuesto General de la Nación; el presupuesto de las Empresas Industriales y Comerciales del Estado no financieras, de las Sociedades de Economía Mixta no financieras, sujetas al régimen de Empresas Industriales y comerciales del Estado del orden nacional y el presupuesto del Sistema General de Regalías."</p>
+										<p style="font-style: italic;">"El presupuesto es por sus mismas características el instrumento de manejo financiero más importante de la política fiscal, donde se programa y registra el gasto público y su forma de financiación y en el se establecen las reglas para su ejecución. (Aspectos generales del proceso presupuestal colombiano."</p>
+										<ul class="actions">
+											<li><a href="http://www.minhacienda.gov.co/HomeMinhacienda/faces/oracle/webcenter/portalapp/pages/presupuestogeneraldelanacion.jspx?_afrLoop=2135057397345254&_afrWindowMode=0&_afrWindowId=null#!%40%40%3F_afrWindowId%3Dnull%26_afrLoop%3D2135057397345254%26_afrWindowMode%3D0%26_adf.ctrl-state%3D4pexhst3q_49" target="_blank" class="button">Aprender más</a></li>
+										</ul>
+									</div>
+									<span class="image"><img src="images/pic01.jpg" alt="" /></span>
+								</div>
+							</section>
+
+						<!-- Dataset -->
+							<section id="first" class="main special">
+								<header class="major">
+									<h2>Fuentes de Información</h2>
+								</header>
+								<ul class="features">
+									<li>
+										<span class="image"><a href="http://www.pte.gov.co/WebsitePTE/EjecucionPresupuestoSectorEntidad?CodigoSector=13&NombreSector=HACIENDA&Anio=2017" target="_blank"><img src="images/pte_logo.png" alt=""/></a></span>
+										<h3>Ministerio de Hacienda</h3>
+										<p>Los datos no se encuentran segmentados, hay que realizar la descarga de cada sector si se quiere obtener el presupuesto asignado por entidad,
+											los datos se pueden descargar en formato CSV, JSON, XLS.</p>
+									</li>
+									<li>
+										<span class="image"><a href="https://www.dnp.gov.co/programas/inversiones-y-finanzas-publicas/Datos-y-Estadisticas/Presupuesto%20de%20Inversion/Paginas/Seguimiento.aspx" target="_blank"><img src="images/head_logo.png" alt=""/></a></span>
+										<h3>Departamento Nacional de Planeación</h3>
+										<p>La información se encuentra consolidada y tiene un nivel más de detalle, se encuentra información adicional de las adiciones y reducciones de presupuesto, de igual forma el presupuesto causado a la fecha de corte,
+											los datos se descargan en formato XLS.</p>
+									</li>
+								</ul>
+								<footer class="major">
+									<ul class="actions">
+										<li><a href="https://datos.gov.co/" target="_blank" class="button">Datos Abiertos</a></li>
+									</ul>
+								</footer>
+							</section>
+
+						<!-- Visualización -->
+							<section id="second" class="main special">
+								<header class="major">
+									<h2>¿Cómo está distribuido el PGN?</h2>
+									<p>A continuación se presenta la distribución del PGN para el año 2017<br />
+									en dos niveles (sector y entidad), anímate a descubrir datos interesantes.</p>
+									<small>Presupuesto inicial: 224.44 billones</small><br/>
+									<small>Presupuesto vigente: 233.26 billones</small>
+								</header>
+
+
+								<div class="bp-navBar">
+									<ul class="bp-navigation clearfix" style="list-style-type:none">
+										<li id="federalButton" class="button selected">Inicial</li>
+										<li id="stateButton" class="button">Vigente</li>
+										<li id="localButton" class="button">Variación</li>
+									</ul>
+								</div>
+
+								<div id="body">
+									<div id="toolTip" class="tooltip" style="opacity:0;">
+										<div id="head" class="headertool"></div>
+										<div id="header1" class="header1tool"></div>
+										<!-- <div id="header2" class="header2"></div> -->
+										<div style="position:absolute; left:10px">
+											<div id="federalTip" class="tip" style="width:135px; left:0px; top:10px; position: absolute;">
+												<div class="header3"><br>Presupuesto Inicial</div>
+												<div class="header-rule"></div>
+												<div id="fedSpend" class="header4"></div>
+											</div>
+											<div id="stateTip" class="tip" style="width:125px; left:140px; top:10px; position: absolute;">
+												<div class="header3"><br>Presupuesto Vigente</div>
+												<div class="header-rule"></div>
+												<div id="stateSpend" class="header4"></div>
+											</div>
+											<div id="localTip" class="tip" style="width:125px; left:272px; top:10px; position: absolute;">
+												<div class="header3"><br>Variación</div>
+												<div class="header-rule"></div>
+												<div id="localSpend" class="header4"></div>
+											</div>
+										</div>
+										<div class="tooltipTail"></div>
+									</div>
+								</div>
+								<p class="content">
+									Nos planteamos incialmente dos preguntas: ¿Cómo está distribuido el presupuesto general de la nación?, ¿Cuáles son los sectores más beneficiados con la partidas presupuestales adicionales?
+									A través de la visualización llegamos a estás respuestas, estos son algunos datos interesantes:
+								</p>
+										<p>El rubro más grande es destinado para el pago de la deuda país con 51.5 billones (22.07%).</p>
+										<p>La ciencia y tecnología tiene una partida presupuestal de tan solo 0.38 billones</p>
+										<p>La entidad Inclusión Social y Reconciliación recibió el mayor aumento de partida presupuestal 1.7 billones adicionales.</p>
+
+
+								<footer class="major">
+									<ul class="actions">
+										<li><a href="https://github.com/FranciscoAriza/presupuesto_2017_colombia" class="button">Código en GitHub</a></li>
+									</ul>
+								</footer>
+							</section>
+
+						<!-- Get Started -->
+							<section id="cta" class="main special">
+								<header class="major">
+									<h2>Próximos pasos</h2>
+									<p>Obtener los datos del presupuesto 2018 que fue aprobado el pasado <br />
+									y realizar un análisis de comparación con el 2017 para descubrir y compartir insights interesantes.</p>
+								</header>
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section>
+							<h2>Visual Analytics</h2>
+							<ul>
+								  <li style="font-style: italic">"Visual Analytics is the field that combines techniques of interactive information visualization with the use of algorithms and methods of data analytics. It's main goal is the generation of insights that help users in the decision making process.""</li>
+									<li style="font-style: italic"	|>"Visual Analytics is used in diverse areas that include science, engineering, business and government. We can find different visual analytics applications in fields such as urban planning, gas explorations, finance, security, natural disasters, health monitoring among others.""</li>
+							</ul>
+							<ul class="actions">
+								<li><a href="http://johnguerra.co/classes/visual_analytics_fall_2017/" target="_blank" class="button">Ir al Curso</a></li>
+							</ul>
+						</section>
+						<section>
+							<h2>Datos de Contacto</h2>
+							<dl class="alt">
+								<dt>Universidad</dt>
+								<dd>Universidad de los Andes, Bogotá, Colombia</dd>
+								<dt>Email</dt>
+								<dd><a href="#">fa.arizab@uniandes.edu.co</a></dd>
+							</dl>
+							<ul class="icons">
+								<li><a href="https://twitter.com/FranciscoAriza" class="icon fa-twitter alt" target="_blank"><span class="label">Twitter</span></a></li>
+								<!-- <li><a href="#" class="icon fa-facebook alt"><span class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon fa-instagram alt"><span class="label">Instagram</span></a></li> -->
+								<li><a href="https://github.com/FranciscoAriza" target="_blank" class="icon fa-github alt"><span class="label">GitHub</span></a></li>
+							</ul>
+						</section>
+						<p class="copyright">&copy; Copyright. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
 </html>
