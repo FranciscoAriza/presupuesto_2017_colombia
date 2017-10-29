@@ -1,4 +1,3 @@
-
 	// Largeur de la width
 	var obj = document.getElementById('chart');
 	var divWidth = obj.offsetWidth;
@@ -181,10 +180,21 @@
 						window.open(d.url);
 				}
 			})*/
+		  
+		  //Modificaría el código para no mostrar NaN cuando no hay número
 			.attr("class","foreignobj")
 			.append("xhtml:div")
 			.attr("dy", ".75em")
-			.html(function(d) { return '' +
+			.html(function(d) {
+			        if (isNan(d3.round(d.value,2)))
+				{
+			         return'' +
+				' <p class="title"> ' + d.name + '</p>' +
+				' <p> Vigente : ' + ' No disponible </p>' +
+				' <p> Variación : No disponible';
+				;})
+				}
+			        return'' +
 				' <p class="title"> ' + d.name + '</p>' +
 				' <p> Vigente : ' + d3.round(d.value,2) + ' billones </p>' +
 				' <p> Variación : ' + formatNumber(d.rate);
